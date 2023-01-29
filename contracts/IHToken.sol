@@ -9,6 +9,6 @@ contract IHToken is ERC20, ERC20Burnable, Ownable {
     constructor() ERC20("IHToken", "IHT") {}
 
     function mint(address _to, uint256 _amount) external onlyOwner {
-        _mint(_to, _amount * 10 ** 18);
+        _mint(_to, _amount);
     }
 }
