@@ -94,7 +94,7 @@ contract Stake is ReentrancyGuard, Ownable {
         perHourReward = _value;
     }
 
-    function updateReward(address _staker) internal {
+    function updateReward(address /*_staker*/) internal {
         Staker storage staker = s_stakers[msg.sender];
 
         staker.rewards += calculateReward();
