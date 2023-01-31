@@ -14,6 +14,10 @@ contract Stake is ReentrancyGuard, Ownable {
         uint256 rewards;
     }
 
+    event Staked(address indexed _staker, uint256[] indexed _tokenIds);
+    event Unstaked(address indexed _unstaker, uint256[] indexed _tokenIds);
+    event RewardClaimed(address indexed _claimer, uint256 indexed _reward);
+
     using SafeERC20 for IERC20;
 
     IERC20 private ihToken;
@@ -51,6 +55,8 @@ contract Stake is ReentrancyGuard, Ownable {
             staker.stakedTokenIds.push(_tokenIds[i]);
             s_tokenIdToStaker[_tokenIds[i]] = msg.sender;
         }
+
+        emit Staked(msg.sender, _tokenIds);
     }
 
     function unstake(uint256[] calldata _tokenIds) external nonReentrant {
@@ -77,6 +83,8 @@ contract Stake is ReentrancyGuard, Ownable {
             delete s_tokenIdToStaker[_tokenIds[i]];
             collectionNft.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
+
+        emit Unstaked(msg.sender, _tokenIds);
     }
 
     function claimReward() external {
@@ -88,6 +96,8 @@ contract Stake is ReentrancyGuard, Ownable {
         staker.rewards = 0;
 
         ihToken.safeTransfer(msg.sender, reward);
+
+        emit RewardClaimed(msg.sender, reward);
     }
 
     function setReward(uint256 _value) external onlyOwner {
@@ -109,5 +119,9 @@ contract Stake is ReentrancyGuard, Ownable {
 
     function viewStaker(address _staker) external view returns (Staker memory) {
         return s_stakers[_staker];
+    }
+
+    function viewTokenIdToStaker(uint256 _tokenId) external view returns (address) {
+        return s_tokenIdToStaker[_tokenId];
     }
 }
