@@ -1,9 +1,5 @@
 # This is a nft-staking project
-**I followed another repository to build this project for a learning purpose. (I wanted to provide the link of that repository. But I couldn't find the link)**
----
----
 **NFT-Stake** 
----
 ---
 The project has some functionalities like:
 - Anyone can stake NFT
@@ -14,8 +10,9 @@ The project has some functionalities like:
 - One can get staker information by only providing the wallet address
 - One can see the token id that is staked by the staker by only providing the
 wallet address
----
+
 Learn more about [NFT-Staking](https://boardroom.tv/what-is-nft-staking/)
----
+
 Get started with [Hardhat](https://hardhat.org/tutorial/creating-a-new-hardhat-project)
----
+
+I followed another repository to build this project for learning purpose and exploring new project ideas to work on.
